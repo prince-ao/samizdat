@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/framecontainer"
-        >
+        tools:ignore="UselessParent">
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinator"
             android:layout_width="match_parent"

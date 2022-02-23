@@ -3,8 +3,11 @@ package com.example.samizdat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.MenuItem
+import com.example.samizdat.bookfragment.BooksFragment
 import com.example.samizdat.databinding.ActivityMainBinding
+import com.example.samizdat.favfragment.FavFragment
+import com.example.samizdat.homefragment.HomeFragment
+import com.example.samizdat.searchfragment.SearchFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

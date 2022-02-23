@@ -6,6 +6,10 @@
         <entry key="app/src/main/res/drawable/book_btn.xml" value="0.192" />
         <entry key="app/src/main/res/drawable/home.xml" value="0.192" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18385416666666668" />
+        <entry key="app/src/main/res/layout/fragment_books.xml" value="0.17477203647416414" />
+        <entry key="app/src/main/res/layout/fragment_fav.xml" value="0.17477203647416414" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18385416666666668" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.25" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.18385416666666668" />
       </map>
     </option>
