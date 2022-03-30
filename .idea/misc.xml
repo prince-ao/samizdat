@@ -3,14 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/drawable/book_btn.xml" value="0.192" />
+        <entry key="app/src/main/res/drawable/click.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/gradient.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/home.xml" value="0.192" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18385416666666668" />
+        <entry key="app/src/main/res/drawable/home_btn.xml" value="0.116" />
+        <entry key="app/src/main/res/drawable/search_btn.xml" value="0.116" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_book_view.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_books.xml" value="0.17477203647416414" />
         <entry key="app/src/main/res/layout/fragment_fav.xml" value="0.17477203647416414" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18385416666666668" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_recent_view.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/home_books.xml" value="0.35280797101449274" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.18385416666666668" />
+        <entry key="app/src/main/res/xml/home_books.xml" value="0.35280797101449274" />
       </map>
     </option>
   </component>
