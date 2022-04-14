@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/searchLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.samizdat.searchfragment.SearchFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/search_btn" />
+    <EditText
+        android:id="@+id/SearchBar"
+        android:layout_width="241dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:drawableStart="@drawable/search"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32"
+        tools:ignore="SpeakableTextPresentCheck" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/Search_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/SearchBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.319" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

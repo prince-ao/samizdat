@@ -1,7 +1,6 @@
 package com.example.samizdat.homefragment
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -11,14 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.samizdat.MainActivity
-import com.example.samizdat.R
-import com.example.samizdat.homefragment.retrofit.HomeModelItem
+import com.example.samizdat.retrofit.models.HomeModelItem
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
@@ -30,7 +26,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.io.InputStream
 import com.example.samizdat.databinding.FragmentRecentViewBinding
-import kotlin.reflect.KFunction1
 
 class RecentViewFragment(private val contex: MainActivity?) : Fragment() {
 
@@ -40,7 +35,7 @@ class RecentViewFragment(private val contex: MainActivity?) : Fragment() {
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder>? = null
     private val myCoroutineScope = CoroutineScope(Dispatchers.Main)
-
+    private lateinit var viewModel: HomeViewModel
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
@@ -48,22 +43,20 @@ class RecentViewFragment(private val contex: MainActivity?) : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRecentViewBinding.inflate(inflater, container, false)
-
-        val viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        /*val recentObserver = Observer<List<HomeModelItem>> {
-            recentData = it
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        if(savedInstanceState?.getParcelableArray("obj") != null){
+            viewModel.recent.value = savedInstanceState.getParcelableArray("obj") as Array<HomeModelItem>
+        }else{
+            viewModel.getRecent()
         }
-
-        viewModel.recent.observe(viewLifecycleOwner, recentObserver)
-        layoutManager = GridLayoutManager(this.context, 2)
-        binding.recyclerView.layoutManager = layoutManager
-        adapter = HomeRecyclerAdapter(recentData)
-        binding.recyclerView.adapter = adapter*/
-        viewModel.recent.observe(viewLifecycleOwner) { item: List<HomeModelItem>? ->
+        viewModel.recent.observe(viewLifecycleOwner) { item: Array<HomeModelItem>? ->
             if (item != null) {
-                myCoroutineScope.launch {
-                    doStuff(item)
-                    adapter!!.notifyDataSetChanged()
+                if(item[0].imageBitmap == null) {
+                    binding.progressBar.visibility = View.VISIBLE
+                    val job = myCoroutineScope.launch {
+                        doStuff(item)
+                        adapter!!.notifyDataSetChanged()
+                    }
                 }
                 adapter = view?.context?.let { HomeRecyclerAdapter(item, contex!!) }!!
                 val layoutManager = GridLayoutManager(this.context, 2)
@@ -78,7 +71,15 @@ class RecentViewFragment(private val contex: MainActivity?) : Fragment() {
         return binding.root
     }
 
-    private suspend fun bitMapper(url: String): Bitmap? =
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArray("obj", viewModel.recent.value)
+        Log.d("SavedInstace", "Saved Instance was called")
+    }
+
+
+
+    suspend fun bitMapper(url: String): Bitmap? =
         myCoroutineScope.async(Dispatchers.Default) {
             val client = HttpClient(Android) {
                 expectSuccess = false
@@ -96,10 +97,11 @@ class RecentViewFragment(private val contex: MainActivity?) : Fragment() {
             return@async BitmapFactory.decodeStream(byteArray)
         }.await()
 
-    private suspend fun doStuff(items: List<HomeModelItem>) {
+    private suspend fun doStuff(items: Array<HomeModelItem>) {
         items.map {
             it.imageBitmap = it.image?.let { it1 -> bitMapper(it1) }
         }
+        binding.progressBar.visibility = View.INVISIBLE
     }
 
 }

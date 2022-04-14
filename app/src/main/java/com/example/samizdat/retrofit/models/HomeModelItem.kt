@@ -1,8 +1,9 @@
-package com.example.samizdat.homefragment.retrofit
+package com.example.samizdat.retrofit.models
 
 import android.graphics.Bitmap
 import android.os.Parcel
 import android.os.Parcelable
+import kotlin.Array
 
 data class HomeModelItem(
     val image: String?,
@@ -68,4 +69,5 @@ data class HomeModelItem(
             return arrayOfNulls(size)
         }
     }
+
 }

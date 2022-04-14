@@ -1,4 +1,4 @@
-package com.example.samizdat.homefragment
+package com.example.samizdat.searchfragment
 
 import android.content.Context
 import android.os.Bundle
@@ -11,11 +11,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.samizdat.MainActivity
 import com.example.samizdat.R
-import com.example.samizdat.retrofit.models.HomeModelItem
+import com.example.samizdat.homefragment.BookView
+import com.example.samizdat.retrofit.models.SearchResult
 
-
-class HomeRecyclerAdapter(items: Array<HomeModelItem>, context: Context): RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder>() {
-    val it: Array<HomeModelItem>
+class SearchResultRecylerAdapeter(items: SearchResult, context: Context): RecyclerView.Adapter<SearchResultRecylerAdapeter.ViewHolder>() {
+    val it: SearchResult
     val contex: Context
     val inflater: LayoutInflater
 
@@ -33,7 +33,6 @@ class HomeRecyclerAdapter(items: Array<HomeModelItem>, context: Context): Recycl
             bookTitle = view.findViewById(R.id.bookTitle)
             bookImage = view.findViewById(R.id.bookImage)
             bookContainer = view.findViewById(R.id.bookContainer)
-
         }
     }
 
@@ -43,22 +42,22 @@ class HomeRecyclerAdapter(items: Array<HomeModelItem>, context: Context): Recycl
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bookTitle.text = it[position].title
-        holder.bookContainer.setOnClickListener{ v ->
-            //v.performClick()
+        holder.bookTitle.text = it.array[position].title
+        holder.bookContainer.setOnClickListener { v ->
             val mFragment = BookView()
             val mBundle = Bundle()
-            mBundle.putParcelable("obj", it[position])
+            mBundle.putParcelable("obj1", it.array[position])
             mFragment.arguments = mBundle
             val mainActivity = contex as MainActivity
             mainActivity.switchContent(mFragment)
         }
-        if(it[position].imageBitmap == null){
+        if(it.array[position].bitmap == null){
             holder.bookImage.setImageResource(R.drawable.blank)
         }else {
-            holder.bookImage.setImageBitmap(it[position].imageBitmap)
+            holder.bookImage.setImageBitmap(it.array[position].bitmap)
         }
     }
 
-    override fun getItemCount(): Int = it.size
+    override fun getItemCount(): Int = it.array.size
+
 }

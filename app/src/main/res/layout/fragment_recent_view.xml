@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RecentTextView"
         app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/home_books" />
+        tools:listitem="@layout/book_view" />
 
     <View
         android:id="@+id/divider"
@@ -42,8 +42,24 @@
         android:background="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="61dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="160dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
