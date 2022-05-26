@@ -13,7 +13,6 @@
 [<img src="./assets/images/samizdat01.png" width=160>](./assets/images/samizdat01.png)
 [<img src="./assets/images/samizdat02.png" width=160>](./assets/images/samizdat02.png)
 [<img src="./assets/images/samizdat03.png" width=160>](./assets/images/samizdat03.png)
-[<img src="./assets/images/samizdat04.png" width=160>](./assets/images/samizdat04.png)
 [<img src="./assets/images/samizdat05.png" width=160>](./assets/images/samizdat05.png)
 
 ## Features
