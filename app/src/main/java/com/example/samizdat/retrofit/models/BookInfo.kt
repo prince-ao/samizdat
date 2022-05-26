@@ -5,7 +5,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import kotlin.Array
 
-data class HomeModelItem(
+data class BookInfo(
     val image: String?,
     val link: String?,
     val title: String?,
@@ -60,12 +60,12 @@ data class HomeModelItem(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<HomeModelItem> {
-        override fun createFromParcel(parcel: Parcel): HomeModelItem {
-            return HomeModelItem(parcel)
+    companion object CREATOR : Parcelable.Creator<BookInfo> {
+        override fun createFromParcel(parcel: Parcel): BookInfo {
+            return BookInfo(parcel)
         }
 
-        override fun newArray(size: Int): Array<HomeModelItem?> {
+        override fun newArray(size: Int): Array<BookInfo?> {
             return arrayOfNulls(size)
         }
     }

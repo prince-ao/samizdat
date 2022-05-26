@@ -42,13 +42,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nFavorites -> {
                     num = 2
-                    temp = FavFragment()
+                    temp = FavFragment(this)
                     temp.setInitialSavedState(fragmentStates[2])
-                }
-                R.id.nBooks -> {
-                    num = 3
-                    temp = BooksFragment()
-                    temp.setInitialSavedState(fragmentStates[3])
                 }
             }
             val prevFrag = fragmentStack.pop()

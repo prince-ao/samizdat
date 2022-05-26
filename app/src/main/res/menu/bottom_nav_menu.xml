@@ -9,7 +9,4 @@
     <item android:id="@+id/nFavorites"
         android:title="@string/favorites_btn"
         android:icon="@drawable/star_btn"/>
-    <item android:id="@+id/nBooks"
-        android:title="@string/books_btn"
-        android:icon="@drawable/book_btn"/>
 </menu>

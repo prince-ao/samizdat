@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/bookView"
-        android:name="com.example.samizdat.homefragment.BookView"
+        android:name="com.example.samizdat.global.BookView"
         android:label="fragment_book_view"
         tools:layout="@layout/fragment_book_view" />
 </navigation>

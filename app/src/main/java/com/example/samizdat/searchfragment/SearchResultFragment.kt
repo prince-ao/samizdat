@@ -2,11 +2,13 @@ package com.example.samizdat.searchfragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,6 +27,7 @@ class SearchResultFragment(private val word: Post, private val contex: MainActiv
     private val binding get() = _binding!!
     private var adapter: RecyclerView.Adapter<SearchResultRecylerAdapeter.ViewHolder>? = null
     private val myCoroutineScope = CoroutineScope(Dispatchers.Main)
+    private lateinit var viewModel: SearchViewModel
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
@@ -32,10 +35,10 @@ class SearchResultFragment(private val word: Post, private val contex: MainActiv
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSearchResultBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         binding.backBtn.setOnClickListener {
             contex.popStack()
         }
-        val viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         if(viewModel.results.value == null) {
             binding.progressBar2.visibility = View.VISIBLE
             viewModel.search(this.word)
@@ -54,7 +57,7 @@ class SearchResultFragment(private val word: Post, private val contex: MainActiv
                 }
             }
             if(items?.array?.isNotEmpty() == true) {
-                if(items.array[0].bitmap == null) {
+                if(items.array[0].imageBitmap == null) {
                     binding.progressBar2.visibility = View.VISIBLE
                     myCoroutineScope.launch {
                         doStuff(items)
@@ -77,9 +80,10 @@ class SearchResultFragment(private val word: Post, private val contex: MainActiv
         }
         return binding.root
     }
+
     private suspend fun doStuff(items: SearchResult) {
-        items.array.map {
-            it.bitmap = it.image.let { it1 -> RecentViewFragment(null).bitMapper(it1!!)  }
+        items.array?.map {
+            it.imageBitmap = it.image.let { it1 -> RecentViewFragment(null).bitMapper(it1!!)  }
         }
         binding.progressBar2.visibility = View.INVISIBLE
     }

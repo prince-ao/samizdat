@@ -1,4 +1,4 @@
-package com.example.samizdat.homefragment
+package com.example.samizdat.favfragment
 
 import android.content.Context
 import android.os.Bundle
@@ -11,30 +11,28 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.samizdat.MainActivity
 import com.example.samizdat.R
+import com.example.samizdat.database.FavBook
 import com.example.samizdat.global.BookView
 import com.example.samizdat.retrofit.models.BookInfo
 
+class FavRecyclerAdapter(items: Array<BookInfo?>, context: Context): RecyclerView.Adapter<FavRecyclerAdapter.ViewHolder>() {
 
-class HomeRecyclerAdapter(items: Array<BookInfo>, context: Context): RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder>() {
-    val it: Array<BookInfo>
+    val it: Array<BookInfo?>
     val contex: Context
-    val inflater: LayoutInflater
-
     init {
         it = items
         contex = context
-        inflater = LayoutInflater.from(contex)
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val bookTitle: TextView
         val bookImage: ImageView
         val bookContainer: ConstraintLayout
+
         init {
             bookTitle = view.findViewById(R.id.bookTitle)
             bookImage = view.findViewById(R.id.bookImage)
             bookContainer = view.findViewById(R.id.bookContainer)
-
         }
     }
 
@@ -44,7 +42,7 @@ class HomeRecyclerAdapter(items: Array<BookInfo>, context: Context): RecyclerVie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bookTitle.text = it[position].title
+        holder.bookTitle.text = it[position]?.title
         holder.bookContainer.setOnClickListener{ v ->
             //v.performClick()
             val mFragment = BookView()
@@ -54,10 +52,10 @@ class HomeRecyclerAdapter(items: Array<BookInfo>, context: Context): RecyclerVie
             val mainActivity = contex as MainActivity
             mainActivity.switchContent(mFragment)
         }
-        if(it[position].imageBitmap == null){
+        if(it[position]?.imageBitmap == null){
             holder.bookImage.setImageResource(R.drawable.blank)
         }else {
-            holder.bookImage.setImageBitmap(it[position].imageBitmap)
+            holder.bookImage.setImageBitmap(it[position]?.imageBitmap)
         }
     }
 

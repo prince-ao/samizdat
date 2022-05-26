@@ -4,8 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.samizdat.retrofit.ApiInstance
-import com.example.samizdat.retrofit.ApiInterface
-import com.example.samizdat.retrofit.models.HomeModelItem
 import com.example.samizdat.retrofit.models.SearchResult
 import retrofit2.Call
 import retrofit2.Callback

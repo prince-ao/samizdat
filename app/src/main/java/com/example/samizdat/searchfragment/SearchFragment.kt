@@ -3,6 +3,7 @@ package com.example.samizdat.searchfragment
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,12 +47,12 @@ class SearchFragment(context: MainActivity) : Fragment() {
             binding.SearchBar.text.clear()
             val imm: InputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.SearchBar.windowToken, 0)
-
             if(post.getWord().isNotEmpty()){
                 val mfrag: Fragment = SearchResultFragment(post, contxt)
                 contxt.switchContent(mfrag)
             }
         }
+
         return binding.root
     }
 }

@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.samizdat.MainActivity
-import com.example.samizdat.retrofit.models.HomeModelItem
+import com.example.samizdat.retrofit.models.BookInfo
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
@@ -32,7 +32,6 @@ class RecentViewFragment(private val contex: MainActivity?) : Fragment() {
 
     private var _binding: FragmentRecentViewBinding? = null
     private val binding get() = _binding!!
-    private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder>? = null
     private val myCoroutineScope = CoroutineScope(Dispatchers.Main)
     private lateinit var viewModel: HomeViewModel
@@ -45,11 +44,11 @@ class RecentViewFragment(private val contex: MainActivity?) : Fragment() {
         _binding = FragmentRecentViewBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         if(savedInstanceState?.getParcelableArray("obj") != null){
-            viewModel.recent.value = savedInstanceState.getParcelableArray("obj") as Array<HomeModelItem>
+            viewModel.recent.value = savedInstanceState.getParcelableArray("obj") as Array<BookInfo>
         }else{
             viewModel.getRecent()
         }
-        viewModel.recent.observe(viewLifecycleOwner) { item: Array<HomeModelItem>? ->
+        viewModel.recent.observe(viewLifecycleOwner) { item: Array<BookInfo>? ->
             if (item != null) {
                 if(item[0].imageBitmap == null) {
                     binding.progressBar.visibility = View.VISIBLE
@@ -74,10 +73,8 @@ class RecentViewFragment(private val contex: MainActivity?) : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelableArray("obj", viewModel.recent.value)
-        Log.d("SavedInstace", "Saved Instance was called")
+        outState.clear()
     }
-
-
 
     suspend fun bitMapper(url: String): Bitmap? =
         myCoroutineScope.async(Dispatchers.Default) {
@@ -97,9 +94,9 @@ class RecentViewFragment(private val contex: MainActivity?) : Fragment() {
             return@async BitmapFactory.decodeStream(byteArray)
         }.await()
 
-    private suspend fun doStuff(items: Array<HomeModelItem>) {
+    suspend fun doStuff(items: Array<BookInfo>) {
         items.map {
-            it.imageBitmap = it.image?.let { it1 -> bitMapper(it1) }
+            it.imageBitmap = it.image.let { it1 -> bitMapper(it1!!) }
         }
         binding.progressBar.visibility = View.INVISIBLE
     }

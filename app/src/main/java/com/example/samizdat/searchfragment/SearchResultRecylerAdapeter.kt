@@ -11,7 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.samizdat.MainActivity
 import com.example.samizdat.R
-import com.example.samizdat.homefragment.BookView
+import com.example.samizdat.global.BookView
 import com.example.samizdat.retrofit.models.SearchResult
 
 class SearchResultRecylerAdapeter(items: SearchResult, context: Context): RecyclerView.Adapter<SearchResultRecylerAdapeter.ViewHolder>() {
@@ -42,22 +42,22 @@ class SearchResultRecylerAdapeter(items: SearchResult, context: Context): Recycl
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bookTitle.text = it.array[position].title
+        holder.bookTitle.text = it.array?.get(position)?.title
         holder.bookContainer.setOnClickListener { v ->
             val mFragment = BookView()
             val mBundle = Bundle()
-            mBundle.putParcelable("obj1", it.array[position])
+            mBundle.putParcelable("obj", it.array?.get(position))
             mFragment.arguments = mBundle
             val mainActivity = contex as MainActivity
             mainActivity.switchContent(mFragment)
         }
-        if(it.array[position].bitmap == null){
+        if(it.array?.get(position)?.imageBitmap == null){
             holder.bookImage.setImageResource(R.drawable.blank)
         }else {
-            holder.bookImage.setImageBitmap(it.array[position].bitmap)
+            holder.bookImage.setImageBitmap(it.array[position].imageBitmap)
         }
     }
 
-    override fun getItemCount(): Int = it.array.size
+    override fun getItemCount(): Int = it.array!!.size
 
 }
