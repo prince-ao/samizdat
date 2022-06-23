@@ -5,7 +5,7 @@
 <h3 align="center">An Android app for downloading books for free.</h3>
 
 <div style="display: flex; justify-content: center">
-<h5 align="center" style="text-align: center; margin-top: 20px; background-color: blue; width: 150px; border-radius: 20px" >Download Coming Soon...</h5>
+<h4 align="center" style="text-align: center; margin-top: 20px" >⚠️ This is just an implimetation for an open source libgen app checkout <a href="https://github.com/prince-ao/Aurora">Aurora</a></h4>
 </div>
 
 ## Screenshots
